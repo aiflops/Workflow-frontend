@@ -1,0 +1,135 @@
+  
+<div id="id01" class="modal" *ngIf="isOpenModal">
+<div class="modal-content animate">
+  <div class="imgcontainer">
+    <span  *ngIf='!exit' >  Nowe wyjście </span>
+    <span  *ngIf='!!exit' >  Edytuj wyjście </span>
+    <span (click)= "close()" class="close" title="Zamknij"> &times;</span>
+  </div>
+  <form  *ngIf='!exit' #tdForm="ngForm" (ngSubmit)="submitCreate(tdForm)">
+    
+      <div class="container">
+            
+          <div class="row">
+              <div class="col-12">
+                <label for="topic"><b> Tytuł wyjścia </b></label>
+                <input type="text"  name = "topic" ngModel required>
+                <div class="error-message" *ngIf="errorRequired.topic">Tytuł wyjścia wymagany </div>
+              </div>
+            </div>
+
+          <div class="row">
+              <div class="col-6">
+                <label for="timeStart"><b> Godzina wyjścia </b></label>
+                <input type="time"  name = "timeStart"  ngModel required min="05:00:00" max="17:00:00">
+                <div class="error-message" *ngIf="errorRequired.timeStart">Godzina wyjścia wymagana</div>
+              </div>
+              
+              <div class="col-6">
+                <label for="duration"><b> Czas trwania wyjścia</b></label>
+                <input type="time" name = "duration"  ngModel  required>
+                <div class="error-message" *ngIf="errorRequired.duration">Czas trwania wyjścia wymagany</div>
+              </div>
+          </div>
+          
+ 
+
+            <div class="row">
+              <div class="col-12">      
+                <label for="desc"><b> Opis wyjścia </b></label>
+                <textarea type="text" class="form-control" rows="5"  name = "desc" ngModel required maxlength="250"></textarea>
+                <div class="error-message" *ngIf="errorRequired.desc">Opis wyjścia jest wymagany, musi mieć maksymalnie 250 znaków</div>
+              </div>
+            </div>
+
+                <span class="overTime-title">  Temin odróbczy </span>
+
+              <div class="row">
+                  <div class="col-6">
+                    <label for="overTimeDate"><b> Data </b></label>
+                    <input type="date"  name = "overTimeDate" ngModel required>
+                    <div class="error-message" *ngIf="errorRequired.overTimeDate">Data terminu odróbczego wymagana</div>
+                  </div>
+                  
+                  <div class="col-6">
+                    <label for="timeStartOverTime"><b> Rozpoczęcie</b></label>
+                    <input type="time" name = "timeStartOverTime" ngModel required>
+                    <div class="error-message" *ngIf="errorRequired.timeStartOverTime">Czas terminu odróbczego wymagany</div>
+                  </div>
+              </div> 
+              
+                <button type="submit">Utwórz</button>
+
+      </div>
+    </form>
+
+    <form  *ngIf='!!exit' #tdForm2="ngForm" (ngSubmit)="submitEdit(tdForm2)">
+    
+        <div class="container">
+              
+            <div class="row">
+                <div class="col-12">
+                  <label for="topic"><b> Tytuł wyjścia  </b></label>
+                  <input type="text"  name = "topic"  [(ngModel)] ='exit.topic' required disabled>
+                  <div class="error-message" *ngIf="errorRequired.topic">Tytuł wyjścia wymagany </div>
+                </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-12">
+                    <label for="date"><b> Data wyjścia  </b></label>
+                    <input type="date"  name = "date"  [(ngModel)] ='exit.date' required min="{{min}}" disabled>
+                    <div class="error-message" *ngIf="errorRequired.date">Data wyjścia wymagana </div>
+                  </div>
+                </div>
+  
+            <div class="row">
+                <div class="col-6">
+                  <label for="timeStart"><b> Godzina wyjścia </b></label>
+                  <input type="time"  name = "timeStart" [(ngModel)] ='exit.time_start'  required min="05:00:00" max="17:00:00">
+                  <div class="error-message" *ngIf="errorRequired.timeStart">Godzina wyjścia wymagana</div>
+                </div>
+                
+                <div class="col-6">
+                  <label for="duration"><b> Czas trwania wyjścia</b></label>
+                  <input type="time" name = "duration"  [(ngModel)] ='exit.duration' required>
+                  <div class="error-message" *ngIf="errorRequired.duration">Czas trwania wyjścia wymagany</div>
+                </div>
+            </div>
+            
+   
+  
+              <div class="row">
+                <div class="col-12">      
+                  <label for="desc"><b> Opis wyjścia </b></label>
+                  <textarea type="text" class="form-control" rows="5" [(ngModel)] ='exit.desc' name="desc" required maxlength="250"></textarea>
+                  <div class="error-message" *ngIf="errorRequired.desc">Opis wyjścia jest wymagany, musi mieć maksymalnie 250 znaków</div>
+                </div>
+              </div>
+  
+                  <span class="overTime-title">  Termin odróbczy </span>
+  
+                <div class="row" *ngIf= "!!overTime">
+                    <div class="col-6">
+                      <label for="overTimeDate"><b> Data</b></label>
+                      <input type="date"  name = "overTimeDate" [(ngModel)] = 'overTime.date' required>
+                      <div class="error-message" *ngIf="errorRequired.overTimeDate">Data terminu odróbczego wymagany</div>
+                    </div>
+                    
+                    <div class="col-6">
+                      <label for="timeStartOverTime"><b>Rozpoczęcie</b></label>
+                      <input type="time" name = "timeStartOverTime" [(ngModel)] = 'overTime.time_start' required >
+                      <div class="error-message" *ngIf="errorRequired.timeStartOverTime">Czas terminu odróbczego wymagany</div>
+                    </div>
+                </div> 
+                
+                  <button type="submit">Edytuj</button>
+                  <button class='removeButton' (click)="remove()"> Usuń</button>
+  
+        </div>
+      </form>
+
+
+
+    </div>
+  </div>

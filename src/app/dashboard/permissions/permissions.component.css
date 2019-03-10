@@ -1,0 +1,14 @@
+.dropdown-item{
+    cursor: pointer;
+}
+.dropdown-item:active{
+    background-color: white;
+}
+
+.borderless th {
+    border-top: none;
+}
+
+.table-rows:hover{
+    cursor: pointer;
+}

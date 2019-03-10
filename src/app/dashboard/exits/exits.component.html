@@ -1,0 +1,99 @@
+<div   class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Moje wyjścia</h1>
+    <div class="btn-toolbar mb-4 mb-md-0">
+          
+            <div class="dropdown btn-group mr-2">
+                  <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                  data-toggle="dropdown"
+                >
+                      {{displayMode}}
+                  </button>
+                      <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item"   (click) = "changeStatus('Wszystkie')">
+                              <i class="fe fe-calendar"></i> 
+                              Wszystkie
+                            </a>
+                        </li>
+  
+                        <li>
+                          <a class="dropdown-item" (click) = "changeStatus('Zatwierdzone')">
+                            <i class="fe fe-check check-green"></i> 
+                              Zatwierdzone
+                          </a>
+                      </li>
+
+                      <li>
+                            <a class="dropdown-item" (click) = "changeStatus('Zablokowane')">
+                                    <i class="fe fe-close close-red"></i> 
+                                      Zablokowane
+                                  </a>
+                        </li>
+
+                            <li>
+                                <a class="dropdown-item" (click) = "changeStatus('Oczekujące')">
+                                  <i class="fe fe-clock clock-orange"></i> 
+                                    Oczekujące
+                                </a>
+                            </li>
+
+                    </ul>
+                </div>
+                <form  #tdForm="ngForm" (ngSubmit)="show(tdForm)">
+                        <div class="btn-group mr-2">
+                          <label for="startTime"><b> Od </b></label>
+                          <input type="date"  name = "startTime" ngModel required #startTime>
+                          <div class="error-message" *ngIf="errorRequired.startTime">Pole wymagane </div>
+
+                        </div>
+                        
+                        <div class="btn-group mr-2">
+                          <label for="stopTime"><b> Do </b></label>
+                          <input type="date"  name = "stopTime" ngModel required min='{{startTime.value}}'>
+                          <div class="error-message" *ngIf="errorRequired.stopTime">Pole wymagane </div>
+                          <div class="error-message" *ngIf="errorIsBefore">Pole końcowe nie może mieć wyższej daty</div>
+
+                      </div>
+                      <div class="btn-group mr-2">
+                        <button type="submit" class="btn-outline-primary"> Pokaż </button>
+                      </div>
+                    </form>
+</div>
+</div>
+
+<table class="table  table-striped borderless">
+        <thead>
+          <tr>
+            <th>Typ wyjścia</th>
+            <th>Data</th>
+            <th>Status</th>
+            <th>Tytuł</th>
+            <th>Rozpoczęcie</th>
+            <th>Czas trwania</th>
+            <th>Drukuj</th>
+            <th>Szczegóły</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-rows" *ngFor="let exit of exits">
+            <td>Służbowe</td>
+            <td>{{convertDate(exit?.date)}}</td>
+            <td>
+                <i *ngIf='exit?.status === 2' class="fe fe-check check-green"></i>
+                <i *ngIf='exit?.status === 1' class="fe fe-close close-red"></i>
+                <i *ngIf='exit?.status === 0' class="fe fe-clock clock-orange"></i>
+            </td>
+            <td>{{exit?.topic}}</td>
+            <td>{{exit?.time_start.substring(0,5)}}</td>
+            <td>{{exit?.duration.substring(0,5)}}</td>
+            <td *ngIf='exit?.status === 2' ><i class="fe fe-print"></i></td>
+            <td *ngIf='exit?.status !== 2 ' ><i class="fe fe-close close-red"></i></td>
+            <td (click)="details(exit)"><i class="fe fe-play"></i></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+<app-day-modal #dayModal
+    (getExits) = "getExits($event)"
+></app-day-modal>
