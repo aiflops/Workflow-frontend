@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+.error-message {
+    color: #cc0033;
+    display: block;
+    font-size: 12px;
+    line-height: 15px;
+    margin: 0 0 5px;
+  }
+
+  textarea{
+    resize: none;
+  }

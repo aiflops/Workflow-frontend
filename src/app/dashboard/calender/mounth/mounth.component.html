@@ -1,0 +1,58 @@
+
+      
+     <h4 >
+
+       <div class="arrow-left" (click) = "leftArrow()">
+         <i class="fe fe-arrow-left"></i>     
+       </div>
+        
+       <span class="mounth">{{date.format('MMMM')}} {{date.format('YYYY')}}</span>
+        
+        <span class="arrow-right" (click) = "rightArrow()" >
+          <i class="fe fe-arrow-right"></i>
+        </span>
+
+     </h4>
+
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Pon</th>
+      <th scope="col">Wto</th>
+      <th scope="col">Śro</th>
+      <th scope="col">Czw</th>
+      <th scope="col">Pią</th>
+      <th scope="col">Sob</th>
+      <th scope="col">Nie</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let week of mounthService.sliceDaysMomentArray(daysArr)">
+      <td  *ngFor="let day of week" (click) = "newEntry(day)"
+       [ngClass] = "{'active-day': checkActiveDay(day?.moment), 'inactive': !checkActiveDay(day?.moment), 'today': todayCheck(day?.moment)}">
+       <div  class="table-cell">  
+         {{day?.moment?.date()}}
+         <i *ngIf='day?.exit?.status === 2' class="fe fe-check check-green"></i>
+         <i *ngIf='day?.exit?.status === 1' class="fe fe-close close-red"></i>
+         <i *ngIf='day?.exit?.status === 0' class="fe fe-clock clock-orange"></i>
+         <!-- <i class="fe fe-terminal"></i> -->
+       </div>
+      </td> 
+    </tr>
+  </tbody>
+</table>
+
+
+<div class="table-legend">
+  <h4>Legenda kalendarza</h4>
+  <div class="table-legend-content">
+        <span class="legend-icon"><i class="fe fe-check check-green"></i><span class="legend-icon-text"> wyjście zatwierdzone</span></span>
+        <span class="legend-icon"><i class="fe fe-close close-red"></i><span class="legend-icon-text"> wyjście zablokowane</span></span>
+        <span class="legend-icon"><i class="fe fe-clock clock-orange"></i><span class="legend-icon-text"> wyjście oczekuje na potwierdzenie</span></span>
+  </div>
+</div>
+
+<app-day-modal #dayModal
+    (getExits) = "getExits($event)"
+></app-day-modal>

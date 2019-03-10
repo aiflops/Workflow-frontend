@@ -1,0 +1,89 @@
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+.calendar-days {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    background-color: #fefefe;
+    border: 1px solid #888;
+    border-right: none;
+}
+.arrow-left {
+    margin-right: 15px;
+    vertical-align: middle;
+    cursor: pointer;
+    display: inline-block;
+
+}
+
+.mounth {
+    vertical-align: text-bottom;
+    cursor: pointer;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    width: 200px;
+    text-align:center;
+    display: inline-block;
+
+}
+
+.arrow-right {
+    margin-left: 15px;
+    vertical-align: middle;
+    cursor: pointer;
+
+}
+
+.arrow-left:hover, .arrow-right:hover {
+    color: #007bff;
+}
+
+.inactive {
+    /* opacity: 0.4; */
+    background-color: #e9e9ec !important;
+}
+.active-day:hover {
+    background-color: #007bff !important;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.table-bordered td, .table-bordered th {
+    background: #f8f9fa;
+}
+
+.today {
+    color: #e5097f;
+}
+
+.table-cell {
+    text-align: left
+}
+.check-green {
+    color: greenyellow !important;
+}
+.close-red {
+    color: red !important;
+}
+.clock-orange{
+    color: orange;
+}
+.table-legend{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.legend-icon{
+    display: block;
+}
+.legend-icon i{
+    margin-right: 10px;
+    font-size: 1.4rem;
+    vertical-align: middle;
+}

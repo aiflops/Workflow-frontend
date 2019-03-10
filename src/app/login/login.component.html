@@ -1,0 +1,43 @@
+
+<div id="id01" class="modal">
+
+<form class="modal-content animate" #tdForm="ngForm" (ngSubmit)="submit(tdForm)">
+  <div class="imgcontainer">
+    <img src="assets/img/tauron_logo.jpg" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    
+    <label for="uname"><b> Nazwa użytkownika/ email </b></label>
+    <input type="text" placeholder="Podaj nazwę użytkownika/ email" name = "uname" ngModel required>
+    <div class="error-message" *ngIf="errorRequired.uname">Nazwa użytkownika wymagana</div>
+
+    <label for="psw"><b>Hasło</b></label>
+    <input type= "password" placeholder="Wpisz hasło" name="psw" ngModel required>
+    <div class="error-message" *ngIf="errorRequired.psw">Hasło wymagane</div>
+
+    <button type="submit">Zaloguj</button>
+
+    <span class="psw">Zapomniałeś <a [routerLink]="['/changePassword']">hasła?</a></span>
+
+  </div>
+</form>
+
+</div>
+
+
+<!-- <form #tdForm="ngForm" (ngSubmit)="submit(tdForm)">
+
+  <fieldset ngModelGroup="userData">
+    <label>username:</label><input name="username" ngModel>
+    <label>lastname:</label><input name="lastname" ngModel>
+  </fieldset>
+  
+  <fieldset ngModelGroup="otherUserData">
+    <label>age:</label><input name="age" ngModel>
+    <label>gender:</label><input name="gender" ngModel>
+    <label>country:</label><input name="country" ngModel>
+  </fieldset>
+  
+   <button type="submit">Send</button>
+ </form> -->
