@@ -129,7 +129,7 @@ export class MounthComponent implements OnInit {
 
   public newEntry(day) {
     if( this.checkActiveDay(day.moment)){
-      this.dayModal.open(day);
+      this.dayModal.open(day, 'form');
       this.isOpenModal = true;
     }
   }

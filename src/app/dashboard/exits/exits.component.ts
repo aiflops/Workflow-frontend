@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
+import * as jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 declare var moment;
 
@@ -22,6 +24,8 @@ export class ExitsComponent implements OnInit {
 
   private fromToDate = null;
 
+
+
   constructor(public api: ApiService) {
 
     this.api.getUserExits().subscribe(res=>{
@@ -32,7 +36,6 @@ export class ExitsComponent implements OnInit {
       this.exitsAll = res.data.filter(el=>{
         return min.isBefore(el.date);
       });
-      console.log(this.exits);
     });
    }
 
@@ -111,7 +114,7 @@ export class ExitsComponent implements OnInit {
         day['moment'] = moment(exit.date);
         day['exit'] = exit;
     
-        this.dayModal.open(day);
+        this.dayModal.open(day, 'form');
    }
 
    public getExits(event) {
@@ -130,9 +133,23 @@ export class ExitsComponent implements OnInit {
         this.exitsAll = res.data.filter(el=>{
           return min.isBefore(el.date);
         });
-        console.log(this.exits);
       });
     }
+  }
+
+  public exportToPdf(exit) {
+
+    if (exit) {
+      this.api.getUserOvertime(exit.id).subscribe(res => {
+        const overTime =  res.data;
+        const fullExit = {exit : exit, overTime: overTime};
+        this.dayModal.open(fullExit, 'pdf');
+      });
+
+    }
+
+
+
   }
 
 }

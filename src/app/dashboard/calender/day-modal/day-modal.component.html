@@ -2,11 +2,12 @@
 <div id="id01" class="modal" *ngIf="isOpenModal">
 <div class="modal-content animate">
   <div class="imgcontainer">
-    <span  *ngIf='!exit' >  Nowe wyjście </span>
-    <span  *ngIf='!!exit' >  Edytuj wyjście </span>
+    <span  *ngIf='!exit && type === "form"' >  Nowe wyjście </span>
+    <span  *ngIf='!!exit && type === "form"'  >  Edytuj wyjście </span>
+    <span  *ngIf='type === "pdf"'  > Wydruk</span>
     <span (click)= "close()" class="close" title="Zamknij"> &times;</span>
   </div>
-  <form  *ngIf='!exit' #tdForm="ngForm" (ngSubmit)="submitCreate(tdForm)">
+  <form  *ngIf="!exit && type === 'form' " #tdForm="ngForm" (ngSubmit)="submitCreate(tdForm)">
     
       <div class="container">
             
@@ -63,7 +64,7 @@
       </div>
     </form>
 
-    <form  *ngIf='!!exit' #tdForm2="ngForm" (ngSubmit)="submitEdit(tdForm2)">
+    <form  *ngIf="!!exit  && type === 'form'" #tdForm2="ngForm" (ngSubmit)="submitEdit(tdForm2)">
     
         <div class="container">
               
@@ -128,6 +129,12 @@
   
         </div>
       </form>
+
+
+
+      <div *ngIf="type === 'pdf'">
+
+      </div>
 
 
 

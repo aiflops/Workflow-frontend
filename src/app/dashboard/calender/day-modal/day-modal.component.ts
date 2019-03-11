@@ -17,6 +17,8 @@ export class DayModalComponent implements OnInit {
     public api: ApiService) { }
   @Input() isOpenModal: boolean;
 
+  public type: string;
+
   @Output() getExits = new EventEmitter();
 
   public min;
@@ -31,22 +33,31 @@ export class DayModalComponent implements OnInit {
   public errorRequired = { topic: false, desc: false, timeStart: false, duration: false, overTimeDate: false, timeStartOverTime: false, date: false };
 
 
-  public open(day){
+  public open(day, type) {
 
-    this.min = moment().format('YYYY-MM-DD');
+    this.type = type;
     this.isOpenModal = true;
 
-    this.momentDay = day.moment;
-    this.exit = day.exit;
+    if (this.type === 'form') {
 
-    console.log(this.exit);
+      this.min = moment().format('YYYY-MM-DD');
+  
+      this.momentDay = day.moment;
+      this.exit = day.exit;
+  
+      console.log(this.exit);
+  
+      if (this.exit) {
+        this.api.getUserOvertime(this.exit.id).subscribe(res => {
+          console.log('ovetime', res);
+          this.overTime =  res.data;
+          console.log(this.overTime);
+        });
+      }
+    } else if (this.type === 'pdf') {
+      this.exit = day;
 
-    if(this.exit){
-      this.api.getUserOvertime(this.exit.id).subscribe(res=> {
-        console.log('ovetime', res);
-        this.overTime =  res.data;
-        console.log(this.overTime);
-      })
+      console.log(this.exit);
     }
 
   }

@@ -86,12 +86,13 @@
             <td>{{exit?.topic}}</td>
             <td>{{exit?.time_start.substring(0,5)}}</td>
             <td>{{exit?.duration.substring(0,5)}}</td>
-            <td *ngIf='exit?.status === 2' ><i class="fe fe-print"></i></td>
+            <td *ngIf='exit?.status === 2' (click)="exportToPdf(exit)"><i class="fe fe-print"></i></td>
             <td *ngIf='exit?.status !== 2 ' ><i class="fe fe-close close-red"></i></td>
             <td (click)="details(exit)"><i class="fe fe-play"></i></td>
           </tr>
         </tbody>
       </table>
+
 
 
 <app-day-modal #dayModal
