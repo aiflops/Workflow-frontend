@@ -118,6 +118,7 @@ export class ExitsComponent implements OnInit {
    }
 
    public getExits(event) {
+    console.log('exit refresh');
     if(!!this.fromToDate) {
       this.api.getUsersExits(this.fromToDate).subscribe(res=>{
         console.log(res);

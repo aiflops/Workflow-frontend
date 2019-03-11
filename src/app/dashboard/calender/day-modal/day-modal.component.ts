@@ -144,11 +144,13 @@ export class DayModalComponent implements OnInit {
     }
 
 
-    public remove()
-    {
-      this.api.deleteExit({idExit: this.exit.id}).subscribe(res=> {
+    public remove() {
+      this.api.deleteExit({idExit: this.exit.id}).subscribe(res => {
         console.log(res);
-      });
-      this.close();
+        this.close();
+      }).add(() => {
+
+      }
+      );
     }
 }
