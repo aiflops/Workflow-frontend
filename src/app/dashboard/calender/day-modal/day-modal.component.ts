@@ -180,7 +180,7 @@ export class DayModalComponent implements OnInit {
       let pdf = new jspdf('p', 'mm', 'a4');
       const position = 0;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-      pdf.save('MYPdf.pdf');
+      pdf.save('wyjscie.pdf');
     });
   }
 }
