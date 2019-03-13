@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import * as jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+
 
 declare var moment;
 

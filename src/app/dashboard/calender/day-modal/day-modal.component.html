@@ -132,9 +132,22 @@
 
 
 
+<<<<<<< HEAD
       <div *ngIf="type === 'pdf'">
         Twoje wyjście jest dnia : {{exit.exit.date}} {{exit.exit.topic}}
+=======
+      <div class="wyjscie-exit" id="contentToConvert" *ngIf="type === 'pdf'">
+        <p><span class="pogrub">Tytul wyjscia: </span>{{exit.exit.topic}}</p>
+        <p><span class="pogrub">Data wyjscia:  </span>{{exit.exit.date}}</p>
+        <p><span class="pogrub">Godzina wyjscia z pracy: </span>{{exit.exit.time_start}}</p>
+        <p><span class="pogrub">Czas trwania wyjscia: </span>{{exit.exit.duration}}</p>
+        <p><span class="pogrub">Twoje wyjscie zakonczy cie </span>{{endofexit}}</p>
+        <p><span class="pogrub">Szacowany termin odróbczy: </span>{{exit.overTime.date}}</p>
+        <p><span class="pogrub">Szacowany czas rozpoczecia terminu odróbczego: </span>{{exit.overTime.time_start}}</p>
+
+>>>>>>> de80862bc04c51488b3591953100bbedc754f48f
       </div>
+      <button class="printbutton" type="submit" (click)="captureScreen()">Drukuj</button>
 
 
 

@@ -2,8 +2,13 @@ import { Component, OnInit, HostBinding, Input, Output, EventEmitter } from '@an
 import { Exit } from 'src/app/models/models';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ApiService } from 'src/app/services/api.service';
+import * as jspdf from 'jspdf';
 
-declare var moment;
+import html2canvas from 'html2canvas';
+
+
+
+declare const moment;
 
 @Component({
   selector: 'app-day-modal',
@@ -31,7 +36,7 @@ export class DayModalComponent implements OnInit {
   public overTime = null;
 
   public errorRequired = { topic: false, desc: false, timeStart: false, duration: false, overTimeDate: false, timeStartOverTime: false, date: false };
-
+  public endofexit = null;
 
   public open(day, type) {
 
@@ -56,7 +61,13 @@ export class DayModalComponent implements OnInit {
       }
     } else if (this.type === 'pdf') {
       this.exit = day;
-      console.log(this.exit);
+      const datatime = moment(this.exit.exit.date + ' ' + this.exit.exit.time_start, 'YYYY-MM-DD HH:mm:ss');
+      const duration = moment(this.exit.exit.date + ' ' + this.exit.exit.duration,'YYYY-MM-DD HH:mm:ss' );
+      const minute = duration.format('mm');
+      const hours = duration.format('HH');
+      datatime.add(hours, 'hours');
+      datatime.add(minute, 'minutes');
+      this.endofexit = datatime.format('HH:mm');
     }
 
   }
@@ -151,5 +162,27 @@ export class DayModalComponent implements OnInit {
 
       }
       );
+
+
+
+
     }
+
+  public captureScreen()
+  {
+    const data = document.getElementById('contentToConvert');
+    html2canvas(data).then(canvas => {
+
+      const imgWidth = 208;
+      const pageHeight = 295;
+      const imgHeight = canvas.height * imgWidth / canvas.width;
+      const heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf('p', 'mm', 'a4');
+      const position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('MYPdf.pdf');
+    });
+  }
 }
