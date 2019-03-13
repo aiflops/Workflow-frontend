@@ -2,8 +2,13 @@ import { Component, OnInit, HostBinding, Input, Output, EventEmitter } from '@an
 import { Exit } from 'src/app/models/models';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ApiService } from 'src/app/services/api.service';
+import * as jspdf from 'jspdf';
 
-declare var moment;
+import html2canvas from 'html2canvas';
+
+
+
+declare const moment;
 
 @Component({
   selector: 'app-day-modal',
@@ -17,6 +22,8 @@ export class DayModalComponent implements OnInit {
     public api: ApiService) { }
   @Input() isOpenModal: boolean;
 
+  public type: string;
+
   @Output() getExits = new EventEmitter();
 
   public min;
@@ -29,24 +36,38 @@ export class DayModalComponent implements OnInit {
   public overTime = null;
 
   public errorRequired = { topic: false, desc: false, timeStart: false, duration: false, overTimeDate: false, timeStartOverTime: false, date: false };
+  public endofexit = null;
 
+  public open(day, type) {
 
-  public open(day){
-
-    this.min = moment().format('YYYY-MM-DD');
+    this.type = type;
     this.isOpenModal = true;
 
-    this.momentDay = day.moment;
-    this.exit = day.exit;
+    if (this.type === 'form') {
 
-    console.log(this.exit);
-
-    if(this.exit){
-      this.api.getUserOvertime(this.exit.id).subscribe(res=> {
-        console.log('ovetime', res);
-        this.overTime =  res.data;
-        console.log(this.overTime);
-      })
+      this.min = moment().format('YYYY-MM-DD');
+  
+      this.momentDay = day.moment;
+      this.exit = day.exit;
+  
+      console.log(this.exit);
+  
+      if (this.exit) {
+        this.api.getUserOvertime(this.exit.id).subscribe(res => {
+          console.log('ovetime', res);
+          this.overTime =  res.data;
+          console.log(this.overTime);
+        });
+      }
+    } else if (this.type === 'pdf') {
+      this.exit = day;
+      const datatime = moment(this.exit.exit.date + ' ' + this.exit.exit.time_start, 'YYYY-MM-DD HH:mm:ss');
+      const duration = moment(this.exit.exit.date + ' ' + this.exit.exit.duration,'YYYY-MM-DD HH:mm:ss' );
+      const minute = duration.format('mm');
+      const hours = duration.format('HH');
+      datatime.add(hours, 'hours');
+      datatime.add(minute, 'minutes');
+      this.endofexit = datatime.format('HH:mm');
     }
 
   }
@@ -133,11 +154,35 @@ export class DayModalComponent implements OnInit {
     }
 
 
-    public remove()
-    {
-      this.api.deleteExit({idExit: this.exit.id}).subscribe(res=> {
+    public remove() {
+      this.api.deleteExit({idExit: this.exit.id}).subscribe(res => {
         console.log(res);
-      });
-      this.close();
+        this.close();
+      }).add(() => {
+
+      }
+      );
+
+
+
+
     }
+
+  public captureScreen()
+  {
+    const data = document.getElementById('contentToConvert');
+    html2canvas(data).then(canvas => {
+
+      const imgWidth = 208;
+      const pageHeight = 295;
+      const imgHeight = canvas.height * imgWidth / canvas.width;
+      const heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf('p', 'mm', 'a4');
+      const position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('MYPdf.pdf');
+    });
+  }
 }
