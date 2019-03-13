@@ -2,10 +2,13 @@ import { Component, OnInit, HostBinding, Input, Output, EventEmitter } from '@an
 import { Exit } from 'src/app/models/models';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ApiService } from 'src/app/services/api.service';
+import * as jspdf from 'jspdf';
+
+import html2canvas from 'html2canvas';
 
 
 
-declare var moment;
+declare const moment;
 
 @Component({
   selector: 'app-day-modal',
@@ -168,5 +171,27 @@ export class DayModalComponent implements OnInit {
 
       }
       );
+
+
+
+
     }
+
+  public captureScreen()
+  {
+    const data = document.getElementById('contentToConvert');
+    html2canvas(data).then(canvas => {
+
+      const imgWidth = 208;
+      const pageHeight = 295;
+      const imgHeight = canvas.height * imgWidth / canvas.width;
+      const heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf('p', 'mm', 'a4');
+      const position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('MYPdf.pdf');
+    });
+  }
 }
