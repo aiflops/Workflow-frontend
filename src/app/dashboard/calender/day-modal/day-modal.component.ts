@@ -56,7 +56,6 @@ export class DayModalComponent implements OnInit {
       }
     } else if (this.type === 'pdf') {
       this.exit = day;
-
       console.log(this.exit);
     }
 

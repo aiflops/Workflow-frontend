@@ -4,7 +4,7 @@
   <div class="imgcontainer">
     <span  *ngIf='!exit && type === "form"' >  Nowe wyjście </span>
     <span  *ngIf='!!exit && type === "form"'  >  Edytuj wyjście </span>
-    <span  *ngIf='type === "pdf"'  > Wydruk</span>
+    <span  *ngIf='type === "pdf"' > Wydruk</span>
     <span (click)= "close()" class="close" title="Zamknij"> &times;</span>
   </div>
   <form  *ngIf="!exit && type === 'form' " #tdForm="ngForm" (ngSubmit)="submitCreate(tdForm)">
@@ -133,7 +133,7 @@
 
 
       <div *ngIf="type === 'pdf'">
-
+        Twoje wyjście jest dnia : {{exit.exit.date}} {{exit.exit.topic}}
       </div>
 
 

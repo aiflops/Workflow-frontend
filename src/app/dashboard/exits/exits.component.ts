@@ -141,9 +141,13 @@ export class ExitsComponent implements OnInit {
   public exportToPdf(exit) {
 
     if (exit) {
+      // pobranie z api godzin odrobczych
       this.api.getUserOvertime(exit.id).subscribe(res => {
         const overTime =  res.data;
-        const fullExit = {exit : exit, overTime: overTime};
+        const fullExit = {
+          exit : exit,
+          overTime: overTime
+        };
         this.dayModal.open(fullExit, 'pdf');
       });
 
