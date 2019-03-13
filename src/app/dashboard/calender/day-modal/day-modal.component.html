@@ -132,22 +132,18 @@
 
 
 
-<<<<<<< HEAD
-      <div *ngIf="type === 'pdf'">
-        Twoje wyjście jest dnia : {{exit.exit.date}} {{exit.exit.topic}}
-=======
       <div class="wyjscie-exit" id="contentToConvert" *ngIf="type === 'pdf'">
-        <p><span class="pogrub">Tytul wyjscia: </span>{{exit.exit.topic}}</p>
-        <p><span class="pogrub">Data wyjscia:  </span>{{exit.exit.date}}</p>
-        <p><span class="pogrub">Godzina wyjscia z pracy: </span>{{exit.exit.time_start}}</p>
-        <p><span class="pogrub">Czas trwania wyjscia: </span>{{exit.exit.duration}}</p>
-        <p><span class="pogrub">Twoje wyjscie zakonczy cie </span>{{endofexit}}</p>
-        <p><span class="pogrub">Szacowany termin odróbczy: </span>{{exit.overTime.date}}</p>
-        <p><span class="pogrub">Szacowany czas rozpoczecia terminu odróbczego: </span>{{exit.overTime.time_start}}</p>
+        <h5 class="header">Wyjście prywatne</h5>
+        <p><span class="pogrub">Tytul wyjścia: </span>{{exit.exit.topic}}</p>
+        <p><span class="pogrub">Data wyjścia:  </span>{{exit.exit.date}}</p>
+        <p><span class="pogrub">Godzina wyjścia z pracy: </span>{{exit.exit.time_start.substring(0, 5)}}</p>
+        <p><span class="pogrub">Czas trwania wyjścia: </span>{{exit.exit.duration.substring(0, 5)}}</p>
+        <p><span class="pogrub">Planowany koniec wyjścia: </span>{{endofexit}}</p>
+        <p><span class="pogrub">Termin odróbczy: </span>{{exit.overTime.date}}</p>
+        <p><span class="pogrub">Początek terminu odróbczego: </span>{{exit.overTime.time_start.substring(0, 5)}}</p>
 
->>>>>>> de80862bc04c51488b3591953100bbedc754f48f
       </div>
-      <button class="printbutton" type="submit" (click)="captureScreen()">Drukuj</button>
+      <button *ngIf="type === 'pdf'" class="printbutton" type="submit" (click)="captureScreen()">Drukuj</button>
 
 
 

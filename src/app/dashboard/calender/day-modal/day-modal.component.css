@@ -113,9 +113,12 @@ button:hover {
     font-size: 1.5rem;
   }
   .wyjscie-exit  {
-    padding-top: 3px%;
+    padding-top: 20px;
+    padding-left: 20px;
+    text-align: left;
+  }
+  .header{
     text-align: center;
-
   }
   .pogrub{
     font-weight: bold;
