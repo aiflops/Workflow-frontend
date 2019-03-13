@@ -3,6 +3,8 @@ import { Exit } from 'src/app/models/models';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ApiService } from 'src/app/services/api.service';
 
+
+
 declare var moment;
 
 @Component({
@@ -31,7 +33,7 @@ export class DayModalComponent implements OnInit {
   public overTime = null;
 
   public errorRequired = { topic: false, desc: false, timeStart: false, duration: false, overTimeDate: false, timeStartOverTime: false, date: false };
-
+  public endofexit = null;
 
   public open(day, type) {
 
@@ -57,7 +59,21 @@ export class DayModalComponent implements OnInit {
     } else if (this.type === 'pdf') {
       this.exit = day;
 
-      console.log(this.exit);
+      console.log(this.exit.exit.date,this.exit.exit.time_start);
+      const datatime = moment(this.exit.exit.date+" "+ this.exit.exit.time_start,       "YYYY-MM-DD HH:mm:ss");
+      // const time = moment(this.exit.exit.date + " T "  + this.exit.exit.time_start);
+      console.log(datatime.format("HH:mm"));
+      const duration = moment(this.exit.exit.date + " " + this.exit.exit.duration, "YYYY-MM-DD HH:mm:ss" );
+      const minute = duration.format("mm");
+      const hours = duration.format("HH");
+      datatime.add(hours, 'hours');
+      datatime.add(minute,'minutes');
+      console.log(datatime.format("HH:mm"));
+      this.endofexit = datatime.format("HH:mm");
+
+
+
+
     }
 
   }

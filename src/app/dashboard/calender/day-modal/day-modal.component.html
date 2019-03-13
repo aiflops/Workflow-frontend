@@ -133,6 +133,13 @@
 
 
       <div *ngIf="type === 'pdf'">
+        Tytul wyjscia: {{exit.exit.topic}}<br>
+        Data wyjscia:  {{exit.exit.date}}<br>
+        Godzina wyjscia z pracy: {{exit.exit.time_start}}<br>
+        Czas trwania wyjscia: {{exit.exit.duration}}<br>
+        Twoje wyjscie zakonczy cie {{endofexit}} <br>
+        Szacowany termin odróbczy: {{exit.overTime.date}}<br>
+        Szacowany czas rozpoczecia terminu odróbczego: {{exit.overTime.time_start}}
 
       </div>
 
