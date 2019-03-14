@@ -98,7 +98,6 @@ export class ExitsComponent implements OnInit {
         ];
         // const fromToDate = [form.value['startTime'],form.value['stopTime']];
         this.api.getUsersExits(this.fromToDate).subscribe(res=>{
-          console.log(res);
           this.exitsAll = res.data;
           this.changeStatus(this.displayMode);
         });
@@ -117,10 +116,8 @@ export class ExitsComponent implements OnInit {
    }
 
    public getExits(event) {
-    console.log('exit refresh');
     if(!!this.fromToDate) {
       this.api.getUsersExits(this.fromToDate).subscribe(res=>{
-        console.log(res);
         this.exitsAll = res.data;
         this.changeStatus(this.displayMode);
       });

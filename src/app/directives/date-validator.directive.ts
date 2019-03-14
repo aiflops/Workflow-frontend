@@ -12,9 +12,10 @@ export class DateValidator implements Validator {
 
   validate(c: AbstractControl): { [key: string]: any } {
 
-    console.log('test');
     let e = c.root.get(this.DateValidator);
-    if(e.value) return {DateValidator: false}
+    if (e.value) {
+      return {DateValidator: false}
+    }
     
   }
 }

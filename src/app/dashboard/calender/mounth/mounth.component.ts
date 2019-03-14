@@ -42,7 +42,6 @@ export class MounthComponent implements OnInit {
         exit: null
       }
     });
-    console.log(this.daysArr);
     
     this.subscriptionGetUserExits = this.apiService.getUserExits().subscribe(res=> {
       this.dayExits = res.data;
@@ -53,14 +52,7 @@ export class MounthComponent implements OnInit {
         }
       });
     });
-      
-      // this.dayExits.forEach(dayExit => {
 
-      //   console.log(moment(dayExit.date).isSame(this.mounthService.sliceDaysMomentArray(this.daysArr)[4][3]));
-        
-      // });
-
-      // this.checkIfExit(this.mounthService.sliceDaysMomentArray(this.daysArr)[4][3]);
   }
 
   public getExit(day)

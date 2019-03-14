@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalStorageService } from '../services/local-storage.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  public roleUser =  null;
+  constructor(private api: ApiService) {
+    this.api.getLoginUser().subscribe(res => {
+      this.roleUser = res.data.roleId;
+      this.api.userInfoSubject.next(res.data);
+   });
+   }
 
   ngOnInit() {
   }
