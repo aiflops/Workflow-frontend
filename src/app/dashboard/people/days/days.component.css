@@ -1,0 +1,50 @@
+.day{
+    margin: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    display: inline-block;
+    background-color: aliceblue;
+}
+
+
+/* Tooltip text */
+.dayinfo {
+    display: none;
+    width: 60px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    /* padding: 5px 0; */
+    border-radius: 5px;
+    position: fixed;
+    margin-left: -15px;
+    padding: 5px;
+    
+    z-index: 1;
+    font-size: .6rem;
+  }
+  
+  .day:hover .dayinfo {
+    display: block;
+  }
+
+  .today{
+    color: red;
+}
+.inactive{
+    color: darkgray;
+}
+
+.check-green {
+    background-color: greenyellow !important;
+}
+.close-red {
+    background-color: red !important;
+}
+.clock-orange{
+    background-color: orange;
+}

@@ -46,7 +46,9 @@ export class ApiService {
     return this.http.get(this.urlApi + 'exit/getUserExits');
   }
 
-
+  public usersTimetables(): Observable<any> {
+    return this.http.get(this.urlApi + 'user/usersTimetables');
+  }
   public getUserOvertime(overtime): Observable<any> {
     return this.http.get(this.urlApi + 'overtime/get/' + overtime);
   }
@@ -57,6 +59,12 @@ export class ApiService {
     .set('startTime', fromToDate[0])
     .set('stopTime', fromToDate[1]);
     return this.http.get(this.urlApi + 'exit/getUsersExits', {params: params});
+  }
+
+  public getExit(id): Observable<any> {
+    const params = new HttpParams()
+    .set('id', id);
+    return this.http.get(this.urlApi + 'exit/get', {params: params});
   }
 
 }

@@ -13,14 +13,7 @@
           <tr *ngFor="let item of usersList">
             <td>{{item.firstName}} {{item.lastName}}</td>
             <td>
-                <div *ngFor="let day of days" 
-                    class = "day"
-                    (mouseenter) ="hover(day) "
-                    [ngClass] = "{'today': todayCheck(day), 'inactive': !checkActiveDay(day)}">
-                    {{day?.date()}}
-                    <span class="dayinfo" *ngIf="checkActiveDay(day)">Brak wyjść</span>
-                </div>
-             
+              <app-days [userId]="item.id" [days]= "days" [exits] = "exitsArray[item.id]"></app-days>
             </td>
           </tr>
 

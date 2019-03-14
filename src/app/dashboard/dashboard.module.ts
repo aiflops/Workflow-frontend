@@ -10,6 +10,7 @@ import { PermissionsComponent } from './permissions/permissions.component';
 import { MounthComponent } from './calender/mounth/mounth.component';
 import { DayModalComponent } from './calender/day-modal/day-modal.component';
 import { FormsModule } from '@angular/forms';
+import { DaysComponent } from './people/days/days.component';
 @NgModule({
   declarations: [
     CalenderComponent,
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     ExtendComponent,
     PermissionsComponent,
     MounthComponent,
-    DayModalComponent
+    DayModalComponent,
+    DaysComponent
   ],
   imports: [
     CommonModule,
