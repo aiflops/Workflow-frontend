@@ -63,22 +63,13 @@ export class DayModalComponent implements OnInit {
       }
     } else if (this.type === 'pdf') {
       this.exit = day;
-
-      console.log(this.exit.exit.date,this.exit.exit.time_start);
-      const datatime = moment(this.exit.exit.date+" "+ this.exit.exit.time_start,       "YYYY-MM-DD HH:mm:ss");
-      // const time = moment(this.exit.exit.date + " T "  + this.exit.exit.time_start);
-      console.log(datatime.format("HH:mm"));
-      const duration = moment(this.exit.exit.date + " " + this.exit.exit.duration, "YYYY-MM-DD HH:mm:ss" );
-      const minute = duration.format("mm");
-      const hours = duration.format("HH");
+      const datatime = moment(this.exit.exit.date + ' ' + this.exit.exit.time_start, 'YYYY-MM-DD HH:mm:ss');
+      const duration = moment(this.exit.exit.date + ' ' + this.exit.exit.duration, 'YYYY-MM-DD HH:mm:ss' );
+      const minute = duration.format('mm');
+      const hours = duration.format('HH');
       datatime.add(hours, 'hours');
-      datatime.add(minute,'minutes');
-      console.log(datatime.format("HH:mm"));
-      this.endofexit = datatime.format("HH:mm");
-
-
-
-
+      datatime.add(minute, 'minutes');
+      this.endofexit = datatime.format('HH:mm');
     }
 
   }
@@ -137,24 +128,22 @@ export class DayModalComponent implements OnInit {
       const formValue = form.value;
       this.isWeekend  =  this.isWeekendDay(formValue['date']);
 
-      if( form.valid && !this.isWeekend) {
+      if ( form.valid && !this.isWeekend) {
 
-
-    
         formValue['idExit'] = this.exit.id;
-        formValue['duration'] = formValue['duration'].substring(0,5)
-        formValue['timeStart'] = formValue['timeStart'].substring(0,5)
-        formValue['date'] = this.exit.date
+        formValue['duration'] = formValue['duration'].substring(0, 5);
+        formValue['timeStart'] = formValue['timeStart'].substring(0, 5);
+        formValue['date'] = this.exit.date;
         formValue['topic'] = this.exit.topic;
 
         console.log('form Value', formValue);
 
-        this.api.editExit(formValue).subscribe(res=> {
+        this.api.editExit(formValue).subscribe(res => {
           console.log(res);
           this.close();
         });
-      }  
-  
+      }
+
     }
 
     public isWeekendDay(day) {
@@ -189,10 +178,10 @@ export class DayModalComponent implements OnInit {
       const imgHeight = canvas.height * imgWidth / canvas.width;
       const heightLeft = imgHeight;
 
-      const contentDataURL = canvas.toDataURL('image/png')
+      const contentDataURL = canvas.toDataURL('image/png');
       let pdf = new jspdf('p', 'mm', 'a4');
       const position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
       pdf.save('MYPdf.pdf');
     });
   }

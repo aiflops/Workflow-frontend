@@ -8,7 +8,7 @@ import { Router, RoutesRecognized } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'tauronWorkFlow';
+  title = '';
 
   public href: string = "";
   public menuVisible = false;
