@@ -1,10 +1,11 @@
 import { Component, OnInit, HostBinding, Input, Output, EventEmitter } from '@angular/core';
-import { Exit } from 'src/app/models/models';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ApiService } from 'src/app/services/api.service';
-import * as jspdf from 'jspdf';
 
+
+import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+
 
 
 
@@ -36,6 +37,7 @@ export class DayModalComponent implements OnInit {
   public overTime = null;
 
   public errorRequired = { topic: false, desc: false, timeStart: false, duration: false, overTimeDate: false, timeStartOverTime: false, date: false };
+
   public endofexit = null;
 
   public open(day, type) {
