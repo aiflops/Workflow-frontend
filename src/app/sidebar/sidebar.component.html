@@ -47,13 +47,13 @@
 
       </ul>
 
-      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <h6 *ngIf="roleUser === 2" class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Przełożony</span>
               <a class="d-flex align-items-center text-muted">
                 <span data-feather="plus-circle"></span>
               </a>
           </h6>
-            <ul class="nav flex-column mb-2">
+            <ul *ngIf="roleUser === 2" class="nav flex-column mb-2">
                 
               <li class="nav-item pointer">
                   <a class="nav-link"
@@ -72,15 +72,6 @@
                       Podania
                   </a>
               </li>
-
-              <!-- <li class="nav-item pointer">
-                  <a class="nav-link"
-                    routerLink="/blocade" routerLinkActive="active"   
-                     >
-                      <i class="fe fe-close"></i>
-                      Blokady
-                  </a>
-              </li> -->
 
             </ul>
 

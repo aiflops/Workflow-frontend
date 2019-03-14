@@ -50,13 +50,10 @@ export class DayModalComponent implements OnInit {
       this.momentDay = day.moment;
       this.exit = day.exit;
   
-      console.log(this.exit);
   
       if (this.exit) {
         this.api.getUserOvertime(this.exit.id).subscribe(res => {
-          console.log('ovetime', res);
           this.overTime =  res.data;
-          console.log(this.overTime);
         });
       }
     } else if (this.type === 'pdf') {
@@ -101,11 +98,9 @@ export class DayModalComponent implements OnInit {
     formValue['idUser'] = this.localStorage.getItem('WorkFlow', 'Session').userId;
     formValue['date'] = this.momentDay.format('YYYY-MM-DD')
 
-    console.log('form Value', formValue);
 
 
       this.api.createExit(formValue).subscribe(res=> {
-        console.log(res);
         this.close();
       });
     }  
@@ -134,10 +129,8 @@ export class DayModalComponent implements OnInit {
         formValue['date'] = this.exit.date;
         formValue['topic'] = this.exit.topic;
 
-        console.log('form Value', formValue);
 
         this.api.editExit(formValue).subscribe(res => {
-          console.log(res);
           this.close();
         });
       }
@@ -154,7 +147,6 @@ export class DayModalComponent implements OnInit {
 
     public remove() {
       this.api.deleteExit({idExit: this.exit.id}).subscribe(res => {
-        console.log(res);
         this.close();
       }).add(() => {
 
