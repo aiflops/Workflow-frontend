@@ -40,13 +40,11 @@ export class PeopleComponent implements OnInit {
         return item.firstName + ' ' + item.lastName;
       });
       this.exitsArray = results[1];
-      console.log('exitsArray', this.exitsArray);
     });
 
   }
 
   public hover(day) {
-    console.log(day.calendar());
   }
 
   public createCalender() {

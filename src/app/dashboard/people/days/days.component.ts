@@ -20,8 +20,6 @@ export class DaysComponent implements OnInit {
    }
 
   ngOnInit() {
-    console.log('input', this.exits);
-    console.log('days', this.days);
   }
 
   public todayCheck(day) {
