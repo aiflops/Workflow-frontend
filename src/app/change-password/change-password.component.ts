@@ -26,7 +26,6 @@ export class ChangePasswordComponent implements OnInit {
     if (form.valid) {
       // todo api request
       this.auth.changePassword({email: formControls['uname'].value}).subscribe(res => {
-        console.log(res);
       });
     }
   }

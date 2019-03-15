@@ -2,11 +2,13 @@
 <div id="id01" class="modal" *ngIf="isOpenModal">
 <div class="modal-content animate">
   <div class="imgcontainer">
-    <span  *ngIf='!exit' >  Nowe wyjście </span>
-    <span  *ngIf='!!exit' >  Edytuj wyjście </span>
+    <span  *ngIf='!exit && type === "form"' >  Nowe wyjście </span>
+    <span  *ngIf='!!exit && type === "form"'  >  Edytuj wyjście </span>
+    <span  *ngIf='type === "pdf"' > Wydruk</span>
+    <span  *ngIf='type === "display"' > Podgląd wyjścia</span>
     <span (click)= "close()" class="close" title="Zamknij"> &times;</span>
   </div>
-  <form  *ngIf='!exit' #tdForm="ngForm" (ngSubmit)="submitCreate(tdForm)">
+  <form  *ngIf="!exit && type === 'form' " #tdForm="ngForm" (ngSubmit)="submitCreate(tdForm)">
     
       <div class="container">
             
@@ -63,7 +65,7 @@
       </div>
     </form>
 
-    <form  *ngIf='!!exit' #tdForm2="ngForm" (ngSubmit)="submitEdit(tdForm2)">
+    <form  *ngIf="!!exit  && type === 'form'" #tdForm2="ngForm" (ngSubmit)="submitEdit(tdForm2)">
     
         <div class="container">
               
@@ -124,10 +126,92 @@
                 </div> 
                 
                   <button type="submit">Edytuj</button>
-                  <button class='removeButton' (click)="remove()"> Usuń</button>
+                  <a class='removeButton' (click)="remove()"> Usuń</a>
   
         </div>
       </form>
+
+      <form  *ngIf="type === 'display'" #tdForm2="ngForm" (ngSubmit)="submitEdit(tdForm2)">
+    
+        <div class="container">
+              
+            <div class="row">
+                <div class="col-12">
+                  <label for="topic"><b> Tytuł wyjścia  </b></label>
+                  <input type="text"  name = "topic"  [(ngModel)] ='exit.topic' required disabled>
+                  <div class="error-message" *ngIf="errorRequired.topic">Tytuł wyjścia wymagany </div>
+                </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-12">
+                    <label for="date"><b> Data wyjścia  </b></label>
+                    <input type="date"  name = "date"  [(ngModel)] ='exit.date' required min="{{min}}" disabled>
+                    <div class="error-message" *ngIf="errorRequired.date">Data wyjścia wymagana </div>
+                  </div>
+                </div>
+  
+            <div class="row">
+                <div class="col-6">
+                  <label for="timeStart"><b> Godzina wyjścia </b></label>
+                  <input type="time"  name = "timeStart" [(ngModel)] ='exit.time_start'  required min="05:00:00" max="17:00:00" disabled>
+                  <div class="error-message" *ngIf="errorRequired.timeStart">Godzina wyjścia wymagana</div>
+                </div>
+                
+                <div class="col-6">
+                  <label for="duration"><b> Czas trwania wyjścia</b></label>
+                  <input type="time" name = "duration"  [(ngModel)] ='exit.duration' required disabled>
+                  <div class="error-message" *ngIf="errorRequired.duration">Czas trwania wyjścia wymagany</div>
+                </div>
+            </div>
+            
+   
+  
+              <div class="row">
+                <div class="col-12">      
+                  <label for="desc"><b> Opis wyjścia </b></label>
+                  <textarea type="text" class="form-control" rows="5" [(ngModel)] ='exit.desc' name="desc" required maxlength="250" disabled></textarea>
+                  <div class="error-message" *ngIf="errorRequired.desc">Opis wyjścia jest wymagany, musi mieć maksymalnie 250 znaków</div>
+                </div>
+              </div>
+  
+                  <span class="overTime-title">  Termin odróbczy </span>
+  
+                <div class="row" *ngIf= "!!overTime">
+                    <div class="col-6">
+                      <label for="overTimeDate"><b> Data</b></label>
+                      <input type="date"  name = "overTimeDate" [(ngModel)] = 'overTime.date' required disabled>
+                      <div class="error-message" *ngIf="errorRequired.overTimeDate">Data terminu odróbczego wymagany</div>
+                    </div>
+                    
+                    <div class="col-6">
+                      <label for="timeStartOverTime"><b>Rozpoczęcie</b></label>
+                      <input type="time" name = "timeStartOverTime" [(ngModel)] = 'overTime.time_start' required disabled >
+                      <div class="error-message" *ngIf="errorRequired.timeStartOverTime">Czas terminu odróbczego wymagany</div>
+                    </div>
+                </div> 
+                
+        </div>
+      </form>
+      
+
+
+
+      <div class="wyjscie-exit" id="contentToConvert" *ngIf="type === 'pdf'">
+        <h5 class="header">Wyjście prywatne</h5>
+        <p><span class="pogrub">Tytul wyjścia: </span>{{exit.exit.topic}}</p>
+        <p><span class="pogrub">Data wyjścia:  </span>{{exit.exit.date}}</p>
+        <p><span class="pogrub">Godzina wyjścia z pracy: </span>{{exit.exit.time_start.substring(0, 5)}}</p>
+        <p><span class="pogrub">Czas trwania wyjścia: </span>{{exit.exit.duration.substring(0, 5)}}</p>
+        <p><span class="pogrub">Planowany koniec wyjścia: </span>{{endofexit}}</p>
+        <p><span class="pogrub">Termin odróbczy: </span>{{exit.overTime.date}}</p>
+        <p><span class="pogrub">Początek terminu odróbczego: </span>{{exit.overTime.time_start.substring(0, 5)}}</p>
+
+      </div>
+
+
+      
+      <button *ngIf="type === 'pdf'" class="printbutton" type="submit" (click)="captureScreen()">Drukuj</button>
 
 
 

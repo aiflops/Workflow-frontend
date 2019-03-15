@@ -8,7 +8,7 @@ import { Router, RoutesRecognized } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'tauronWorkFlow';
+  title = '';
 
   public href: string = "";
   public menuVisible = false;
@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
       if (event instanceof RoutesRecognized) {
         const routeData = event.state.root.firstChild;
         this.menuVisible = routeData.data['barVisible'];
-        console.log(this.menuVisible);
       }
     });
   }
