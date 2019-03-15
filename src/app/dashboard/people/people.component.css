@@ -28,6 +28,16 @@
     background-color: aliceblue;
 }
 
+.check-green {
+    background-color: greenyellow !important;
+}
+.close-red {
+    background-color: red !important;
+}
+.clock-orange{
+    background-color: orange;
+}
+
 
 /* Tooltip text */
 .dayinfo {

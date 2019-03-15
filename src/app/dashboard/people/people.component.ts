@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { UserLogin } from 'src/app/models/models';
 import { forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 declare var moment;
+
 
 @Component({
   selector: 'app-people',
@@ -13,6 +14,7 @@ declare var moment;
 })
 export class PeopleComponent implements OnInit {
 
+  @ViewChild('dayModal') dayModal;
   public date = null;
   public days  = [];
 
@@ -74,5 +76,10 @@ export class PeopleComponent implements OnInit {
   }
 
   ngOnInit() {  }
+
+  public openModal(day) {
+    this.dayModal.open(day, 'display');
+
+  }
 
 }

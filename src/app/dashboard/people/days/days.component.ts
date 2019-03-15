@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 
 declare var moment;
@@ -14,6 +14,7 @@ export class DaysComponent implements OnInit {
   @Input() days: Array<any>;
   @Input() userId: number;
   @Input() exits: any;
+  @Output() openModalDay = new EventEmitter<any>();
 
   constructor(private api: ApiService) {
    }
@@ -75,9 +76,14 @@ export class DaysComponent implements OnInit {
       const tmp = this.exits.filter(exit => {
         return moment(exit.exitDate).format('L') === day.format('L');
       });
-      const id =  tmp.pop().id;
-      console.log(id);
-      this.api.getExit(id);
+      if (!!tmp.length) {
+        const id =  tmp.pop().id;
+        this.api.getExit(id).subscribe(res => {
+
+          const dayObj = {moment: day, exit: res.data};
+          this.openModalDay.emit(dayObj);
+        });
+      }
     }
 
   }

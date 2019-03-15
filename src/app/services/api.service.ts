@@ -63,7 +63,7 @@ export class ApiService {
 
   public getExit(id): Observable<any> {
     const params = new HttpParams()
-    .set('id', id);
+    .set('idExit', id);
     return this.http.get(this.urlApi + 'exit/get', {params: params});
   }
 
