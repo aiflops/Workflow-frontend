@@ -2,7 +2,7 @@
     <div class="sidebar-sticky left-bar">
       <ul class="nav flex-column left-bar-list">
         
-        <li class="nav-item pointer" >
+        <li class="nav-item pointer" *ngIf="roleUser === 1">
           <a class="nav-link"
           routerLink="/calender" routerLinkActive="active"
           >
@@ -12,7 +12,7 @@
           </a>
         </li>
 
-        <li class="nav-item pointer">
+        <li class="nav-item pointer" *ngIf="roleUser === 1">
           <a class="nav-link"
           routerLink="/exits" routerLinkActive="active"
          >
@@ -20,7 +20,7 @@
             Moje wyjścia
           </a>
         </li>
-        <li class="nav-item pointer">
+        <li class="nav-item pointer" *ngIf="roleUser === 1">
           <a class="nav-link"
           routerLink="/message" routerLinkActive="active"
            >
