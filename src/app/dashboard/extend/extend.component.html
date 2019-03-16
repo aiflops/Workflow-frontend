@@ -1,40 +1,46 @@
 <div   class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2"> Ustal zastępstwo</h1>
 </div>
+<form #tdForm="ngForm" (ngSubmit)="submit(tdForm)">
+        <div class="container">
+                <div class="row">
+        
+                        <div class="form-group col-sm-12">
+                                <label for="id">Wybierz zastępce</label>
+                                <select class="form-control" name="id" id="id" ngModel required>
+                                        <option *ngFor="let item of usersList" value="{{item?.id}}">{{item?.name}}</option>
+                                </select>
+                                <div class="error-message" *ngIf="errorRequired.id">Pole wymagane</div>
 
-
-<div class="container">
-        <div class="row">
-
-                <div class="form-group col-sm-12">
-                        <label for="exampleFormControlSelect1">Wybierz zastępce</label>
-                        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="extendPerson">
-                                <option>Kasper Kalfas</option>
-                                <option>Jan Jankowski</option>
-                        </select>
+                        </div>
                 </div>
-        </div>
-                
-        <div class="row">
-                <div class="form-group col-sm-6">
-                        <label for="startExtend">Początek zastępstwa</label>
-                        <input class="form-control" type="date" name="startExtend" id="startExtend">
-                
+                        
+                <div class="row">
+                        <div class="form-group col-sm-6">
+                                <label for="startExtend">Początek zastępstwa</label>
+                                <input class="form-control" type="date" name="startExtend" id="startExtend" ngModel required>
+                                <div class="error-message" *ngIf="errorRequired.startExtend">Pole wymagane</div>
+                        
+                        </div>
+                        <div class="form-group col-sm-6">
+        
+                                <label for="endExtend">Koniec zastępstwa</label>
+                                <input class="form-control" type="date" name="endExtend" id="endExtend" ngModel required>
+                                <!-- todo livio error message nie moze byc wczesniej niz pocztek -->
+                                <div class="error-message" *ngIf="errorRequired.endExtend">Pole wymagane</div>
+        
+                        </div>
                 </div>
-                <div class="form-group col-sm-6">
-
-                        <label for="endExtend">Koniec zastępstwa</label>
-                        <input class="form-control" type="date" name="endExtend" id="endExtend">
-
+        
+                <div class="row">
+                        <div class="form-group col-sm-12">
+        
+                                <button type="submit">Wyślij</button>
+        
+                        </div>
                 </div>
+        
         </div>
 
-        <div class="row">
-                <div class="form-group col-sm-12">
+</form>
 
-                        <button type="submit">Wyślij</button>
-
-                <div class="form-group col-sm-12">
-
-        </div>
-</div>
