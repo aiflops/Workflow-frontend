@@ -67,4 +67,8 @@ export class ApiService {
     return this.http.get(this.urlApi + 'exit/get', {params: params});
   }
 
+  public setDeputy(deputy): Observable<any> {
+    return this.http.post(this.urlApi + 'user/setDeputy', deputy);
+  }
+
 }

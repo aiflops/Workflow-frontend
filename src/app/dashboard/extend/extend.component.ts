@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
+import { forkJoin } from 'rxjs';
 
 declare var moment;
 
@@ -44,6 +45,19 @@ export class ExtendComponent implements OnInit {
     console.log(form.value['startExtend'], form.value['endExtend']);
     if (form.valid) {
       // console.log(form.value['startExtend'], form.value['endExtend'] );
+      const setDeputy = this.api.setDeputy(form.value);
+      const getUsers =  this.api.getUsers();
+
+      setDeputy.subscribe(res => {
+        alert('Nadano prawa dla uzytkownika');
+        getUsers.subscribe(res1 => {
+          this.usersList  = res1.data.map( item => {
+            return {id: item.id, email: item.email, name: item.firstName + ' ' + item.lastName};
+          });
+        });
+
+      });
+
     }
   }
 
