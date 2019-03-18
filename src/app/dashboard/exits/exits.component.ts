@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
+import { Router } from '@angular/router';
 
 
 declare var moment;
@@ -25,14 +26,20 @@ export class ExitsComponent implements OnInit {
 
 
 
-  constructor(public api: ApiService) {
+  constructor(public api: ApiService, public router: Router) {
 
-    this.api.getUserExits().subscribe(res=>{
+    this.api.getLoginUser().subscribe(res => {
+      if (res.data.roleId === 2) {
+        this.router.navigate(['people']);
+      }
+    });
+
+    this.api.getUserExits().subscribe(res => {
       const min = moment();
-      this.exits = res.data.filter(el=>{
+      this.exits = res.data.filter(el => {
         return min.isBefore(el.date);
       });
-      this.exitsAll = res.data.filter(el=>{
+      this.exitsAll = res.data.filter(el => {
         return min.isBefore(el.date);
       });
     });

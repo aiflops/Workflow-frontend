@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { forkJoin } from 'rxjs';
+import { Router } from '@angular/router';
 
 declare var moment;
 
@@ -20,7 +21,14 @@ export class ExtendComponent implements OnInit {
   public usersList = new Array<any>();
 
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService, private router: Router) {
+    this.api.getLoginUser().subscribe(res => {
+      if (res.data.roleId === 1) {
+        this.router.navigate(['calender']);
+      }
+    });
+
+
     this.api.getUsers().subscribe(res => {
       this.usersList  = res.data.map( item => {
         return {id: item.id, email: item.email, name: item.firstName + ' ' + item.lastName};
