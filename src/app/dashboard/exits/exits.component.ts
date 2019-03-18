@@ -28,12 +28,6 @@ export class ExitsComponent implements OnInit {
 
   constructor(public api: ApiService, public router: Router) {
 
-    this.api.getLoginUser().subscribe(res => {
-      if (res.data.roleId === 2) {
-        this.router.navigate(['people']);
-      }
-    });
-
     this.api.getUserExits().subscribe(res => {
       const min = moment();
       this.exits = res.data.filter(el => {
@@ -46,6 +40,11 @@ export class ExitsComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.api.getLoginUser().subscribe(res => {
+      if (res.data.roleId === 2) {
+        this.router.navigate(['people']);
+      }
+    });
   }
 
   public convertDate(date) {

@@ -14,12 +14,6 @@ export class PermissionsComponent extends ExitsComponent implements OnInit {
   constructor(public api: ApiService, public router: Router) {
     super(api, router);
 
-    this.api.getLoginUser().subscribe(res => {
-      if (res.data.roleId === 1) {
-        this.router.navigate(['calender']);
-      }
-    });
-
     this.api.getUsers().subscribe(res => {
       this.usersList  = res.data.map( item => {
         return {id: item.id, email: item.email, name: item.firstName + ' ' + item.lastName};
@@ -28,6 +22,11 @@ export class PermissionsComponent extends ExitsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.api.getLoginUser().subscribe(res => {
+      if (res.data.roleId === 1) {
+        this.router.navigate(['calender']);
+      }
+    });
   }
 
 }
