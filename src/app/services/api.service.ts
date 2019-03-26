@@ -71,4 +71,11 @@ export class ApiService {
     return this.http.post(this.urlApi + 'user/setDeputy', deputy);
   }
 
+  public getExitsFromTimeAll(jsonData): Observable<any> {
+    return this.http.get(this.urlApi + 'exit/getExitsFromTime');
+  }
+  public getExitsFromTimeWithStatus(jsonData): Observable<any> {
+    return this.http.get(this.urlApi + 'exit/getExitsFromTimeWithStatus');
+  }
+
 }

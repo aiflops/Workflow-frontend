@@ -53,7 +53,7 @@ export class ExitsComponent implements OnInit {
 
 
   public changeStatus(word) {
-    switch(word){
+    switch (word) {
 
       case 'Wszystkie':
         this.displayMode = 'Wszystkie';

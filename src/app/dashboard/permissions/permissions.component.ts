@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class PermissionsComponent extends ExitsComponent implements OnInit {
 
   public usersList = new Array<any>();
+  public displayMode = 'Wszystkie';
   constructor(public api: ApiService, public router: Router) {
     super(api, router);
 
@@ -27,6 +28,34 @@ export class PermissionsComponent extends ExitsComponent implements OnInit {
         this.router.navigate(['calender']);
       }
     });
+  }
+
+  public show(form) {
+    let displayModeNumer;
+
+    switch (this.displayMode) {
+      case('Wszystkie'):
+      displayModeNumer = 10;
+      break;
+      case('Zatwierdzone'):
+      displayModeNumer = 2;
+      break;
+      case('Zablokowane'):
+      displayModeNumer = 1;
+      break;
+      case('Oczekujące'):
+      displayModeNumer = 0;
+      break;
+      default:
+      displayModeNumer = 10;
+      break;
+    }
+
+    if (form.valid) {
+      const jsonForm = form.value;
+      jsonForm['status'] = displayModeNumer;
+      console.log(jsonForm);
+    }
   }
 
 }
