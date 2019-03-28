@@ -49,6 +49,8 @@ export class ExtendComponent implements OnInit {
         this.errorRequired[key] = false;
       }
     }
+
+    // RAFAL
     // moment JS poronanie dat
     console.log(form.value['startExtend'], form.value['endExtend']);
     if (form.valid) {
