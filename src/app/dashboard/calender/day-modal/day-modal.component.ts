@@ -3,7 +3,6 @@ import { Exit } from 'src/app/models/models';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ApiService } from 'src/app/services/api.service';
 import * as jspdf from 'jspdf';
-
 import html2canvas from 'html2canvas';
 
 

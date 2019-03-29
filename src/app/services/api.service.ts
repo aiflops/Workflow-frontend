@@ -65,6 +65,7 @@ export class ApiService {
     const params = new HttpParams()
     .set('idExit', id);
     return this.http.get(this.urlApi + 'exit/get', {params: params});
+<<<<<<< HEAD
   }
 
   public setDeputy(deputy): Observable<any> {
@@ -76,6 +77,8 @@ export class ApiService {
   }
   public getExitsFromTimeWithStatus(jsonData): Observable<any> {
     return this.http.get(this.urlApi + 'exit/getExitsFromTimeWithStatus');
+=======
+>>>>>>> rafcio
   }
 
 }
