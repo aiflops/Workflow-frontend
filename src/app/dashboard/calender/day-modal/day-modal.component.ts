@@ -3,7 +3,6 @@ import { Exit } from 'src/app/models/models';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ApiService } from 'src/app/services/api.service';
 import * as jspdf from 'jspdf';
-
 import html2canvas from 'html2canvas';
 
 
@@ -35,7 +34,8 @@ export class DayModalComponent implements OnInit {
 
   public overTime = null;
 
-  public errorRequired = { topic: false, desc: false, timeStart: false, duration: false, overTimeDate: false, timeStartOverTime: false, date: false };
+  public errorRequired = {
+     topic: false, desc: false, timeStart: false, duration: false, overTimeDate: false, timeStartOverTime: false, date: false };
   public endofexit = null;
 
   public open(day, type) {
@@ -50,13 +50,10 @@ export class DayModalComponent implements OnInit {
       this.momentDay = day.moment;
       this.exit = day.exit;
   
-      console.log(this.exit);
   
       if (this.exit) {
         this.api.getUserOvertime(this.exit.id).subscribe(res => {
-          console.log('ovetime', res);
           this.overTime =  res.data;
-          console.log(this.overTime);
         });
       }
     } else if (this.type === 'pdf') {
@@ -68,6 +65,15 @@ export class DayModalComponent implements OnInit {
       datatime.add(hours, 'hours');
       datatime.add(minute, 'minutes');
       this.endofexit = datatime.format('HH:mm');
+    } else if (this.type === 'display') {
+      this.min = moment().format('YYYY-MM-DD');
+      this.momentDay = day.moment;
+      this.exit = day.exit;
+      if (this.exit) {
+        this.api.getUserOvertime(this.exit.id).subscribe(res => {
+          this.overTime =  res.data;
+        });
+      }
     }
 
   }
@@ -91,24 +97,19 @@ export class DayModalComponent implements OnInit {
         this.errorRequired[key] = false;
       }
     }
-    
-    const formValue = form.value;
-    
 
-  if( form.valid) {
+    const formValue = form.value;
+
+  if ( form.valid) {
 
 
     formValue['idUser'] = this.localStorage.getItem('WorkFlow', 'Session').userId;
     formValue['date'] = this.momentDay.format('YYYY-MM-DD')
 
-    console.log('form Value', formValue);
-
-
-      this.api.createExit(formValue).subscribe(res=> {
-        console.log(res);
+    this.api.createExit(formValue).subscribe(res=> {
         this.close();
       });
-    }  
+    }
 
     }
 
@@ -122,7 +123,6 @@ export class DayModalComponent implements OnInit {
           this.errorRequired[key] = false;
         }
       }
-      
       const formValue = form.value;
       this.isWeekend  =  this.isWeekendDay(formValue['date']);
 
@@ -134,10 +134,8 @@ export class DayModalComponent implements OnInit {
         formValue['date'] = this.exit.date;
         formValue['topic'] = this.exit.topic;
 
-        console.log('form Value', formValue);
 
         this.api.editExit(formValue).subscribe(res => {
-          console.log(res);
           this.close();
         });
       }
@@ -154,20 +152,14 @@ export class DayModalComponent implements OnInit {
 
     public remove() {
       this.api.deleteExit({idExit: this.exit.id}).subscribe(res => {
-        console.log(res);
         this.close();
       }).add(() => {
 
       }
       );
-
-
-
-
     }
 
-  public captureScreen()
-  {
+  public captureScreen() {
     const data = document.getElementById('contentToConvert');
     html2canvas(data).then(canvas => {
 

@@ -45,4 +45,8 @@ export class LocalStorageService {
     return !!this.getItem('WorkFlow', 'Session');
   }
 
+  public getUser(): any {
+    return this.getItem('WorkFlow', 'User');
+  }
+
 }

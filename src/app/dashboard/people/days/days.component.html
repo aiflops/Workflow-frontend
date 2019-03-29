@@ -1,0 +1,20 @@
+<div *ngFor="let day of days" 
+    class = "day"
+    (mouseenter) ="hover(day) "
+    [ngClass] = "
+    {'today': todayCheck(day),
+     'inactive': !checkActiveDay(day),
+     'clock-orange': checkExit(day) === 0,
+     'close-red': checkExit(day) === 1,
+     'check-green': checkExit(day) === 2
+    }"
+    (click)="openModal(day)">
+    {{day?.date()}}
+    <span class="dayinfo" *ngIf="checkActiveDay(day) && checkExit(day) ===-1">Brak wyjść</span>
+    <span class="dayinfo" *ngIf="checkExit(day) !==-1">
+      Godz. {{getInfoDay(day)?.exitStart_time.substring(0,5)}}<br>
+      Czas {{getInfoDay(day)?.duration.substring(0,5)}}
+    </span>
+</div>
+
+<!-- 'exit': checkExit(day)} -->
