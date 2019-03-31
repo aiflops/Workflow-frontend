@@ -29,10 +29,12 @@ export class ApiService {
     return this.http.get(this.urlApi + 'user/usersAll');
   }
 
+  /** wysyłanie mail */
   public createExit(exit) {
     return this.http.post(this.urlApi + 'exit/create', exit);
   }
 
+  /** wysyłanie mail */
   public editExit(exit) {
     return this.http.put(this.urlApi + 'exit/edit', exit);
   }

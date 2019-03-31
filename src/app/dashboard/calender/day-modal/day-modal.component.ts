@@ -126,7 +126,7 @@ export class DayModalComponent implements OnInit {
       const formValue = form.value;
       this.isWeekend  =  this.isWeekendDay(formValue['date']);
 
-      if ( form.valid && !this.isWeekend) {
+      if ( form.valid ) {
 
         formValue['idExit'] = this.exit.id;
         formValue['duration'] = formValue['duration'].substring(0, 5);
