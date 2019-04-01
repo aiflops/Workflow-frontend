@@ -80,4 +80,12 @@ export class ApiService {
     return this.http.get(this.urlApi + 'exit/getExitsFromTimeWithStatus');
   }
 
+  public acceptExit(jsonData): Observable<any> {
+    return this.http.post(this.urlApi + 'exit/accept', jsonData);
+  }
+
+  public refuseExit(jsonData): Observable<any> {
+    return this.http.post(this.urlApi + 'exit/refuse', jsonData);
+  }
+
 }

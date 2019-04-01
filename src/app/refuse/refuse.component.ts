@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-refuse',
@@ -10,10 +11,20 @@ export class RefuseComponent implements OnInit {
 
   public refuseHash = '';
 
-  constructor( private route: ActivatedRoute) {
+  public message = '';
+
+
+  constructor( private route: ActivatedRoute,
+    private api: ApiService) {
     this.refuseHash = this.route.snapshot.paramMap.get('hash');
+    this.api.refuseExit({'hash' : this.refuseHash}).subscribe(res => {
+      this.message = res.message;
+    });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
+
+
 
 }
