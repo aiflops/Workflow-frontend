@@ -14,6 +14,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptorService } from './services/api-interceptor.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { DateValidator } from './directives/date-validator.directive';
+import { RefuseComponent } from './refuse/refuse.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { DateValidator } from './directives/date-validator.directive';
     NavbarComponent,
     LoginComponent,
     ChangePasswordComponent,
-    DateValidator
+    DateValidator,
+    RefuseComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
