@@ -22,7 +22,7 @@ const routes: Routes = [
 
   { path: 'exits', data: { 'barVisible': true }, component: ExitsComponent, canActivate: [AccountGuard]  },
 
-  { path: 'message', data: { 'barVisible': true }, component: MessagesComponent, canActivate: [AccountGuard]  },
+  // { path: 'message', data: { 'barVisible': true }, component: MessagesComponent, canActivate: [AccountGuard]  },
 
   { path: 'settings', data: { 'barVisible': true }, component: SettingsComponent, canActivate: [AccountGuard]  },
 
