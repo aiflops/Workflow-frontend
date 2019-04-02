@@ -104,9 +104,9 @@ export class DayModalComponent implements OnInit {
 
 
     formValue['idUser'] = this.localStorage.getItem('WorkFlow', 'Session').userId;
-    formValue['date'] = this.momentDay.format('YYYY-MM-DD')
+    formValue['date'] = this.momentDay.format('YYYY-MM-DD');
 
-    this.api.createExit(formValue).subscribe(res=> {
+    this.api.createExit(formValue).subscribe(res => {
         this.close();
       });
     }
@@ -153,6 +153,7 @@ export class DayModalComponent implements OnInit {
     public remove() {
       this.api.deleteExit({idExit: this.exit.id}).subscribe(res => {
         this.close();
+        location.reload();
       }).add(() => {
 
       }
