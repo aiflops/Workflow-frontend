@@ -54,8 +54,12 @@ export class PermissionsComponent extends ExitsComponent implements OnInit {
 
     if (form.valid) {
       const jsonForm = form.value;
-      jsonForm['status'] = displayModeNumer;
+      // jsonForm['status'] = displayModeNumer;
       console.log(jsonForm);
+      this.api.getExitsFromTimeAll(jsonForm).subscribe(res => {
+        this.exitsAll = res.data;
+        this.changeStatus(this.displayMode);
+      });
     }
   }
 
