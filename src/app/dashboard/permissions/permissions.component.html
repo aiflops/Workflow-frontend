@@ -2,7 +2,7 @@
     <h1 class="h2">Wyjścia</h1>
     <div class="btn-toolbar">
 
-        <div class="dropdown">
+        <div class="dropdown btn-group">
             <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle"
             data-toggle="dropdown"
           >
@@ -58,13 +58,13 @@
               <div class="error-message" *ngIf="errorIsBefore">Pole końcowe nie może mieć wyższej daty</div>
           </div>
           
-            <select class="form-control" name="id" id="id" ngModel required>
+            <select class="form-control select-user" name="id" id="id" ngModel required>
                     <option *ngFor="let item of usersList" value="{{item?.id}}">{{item?.name}}</option>
             </select>
             <div class="error-message" *ngIf="errorRequired.id">Pole wymagane</div>
         
         
-        <div class="btn-group">
+        <div class="btn-group submit-btn-own">
             <button type="submit" class="btn-primary"> Pokaż </button>
         </div>
 
