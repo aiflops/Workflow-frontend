@@ -48,6 +48,16 @@ export class ApiService {
     return this.http.get(this.urlApi + 'exit/getUserExits');
   }
 
+  public getUserExits2(formData): Observable<any> {
+    const params = new HttpParams()
+
+    .set('startTime', formData[0])
+    .set('stopTime', formData[1])
+    .set('idUser', formData[2]);
+
+    return this.http.get(this.urlApi + 'exit/getUserExits2', {params: params});
+  }
+
   public usersTimetables(): Observable<any> {
     return this.http.get(this.urlApi + 'user/usersTimetables');
   }

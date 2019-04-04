@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ExitsComponent } from '../exits/exits.component';
 import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-permissions',
@@ -12,8 +13,8 @@ export class PermissionsComponent extends ExitsComponent implements OnInit {
 
   public usersList = new Array<any>();
   public displayMode = 'Wszystkie';
-  constructor(public api: ApiService, public router: Router) {
-    super(api, router);
+  constructor(public api: ApiService, public router: Router, public localStorage: LocalStorageService) {
+    super(api, router, localStorage);
 
     this.api.getUsers().subscribe(res => {
       this.usersList  = res.data.map( item => {
