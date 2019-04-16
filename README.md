@@ -21,4 +21,4 @@ Angular 6+, HTML5, CSS3
 ![Alt text](https://user-images.githubusercontent.com/44456037/56207810-f88a3200-604f-11e9-8f2e-1aaf195fc94c.PNG "New Exit")
 
 #### A) Workers Preview
-![Alt text](https://user-images.githubusercontent.com/44456037/56207826-ff18a980-604f-11e9-9598-defb62a9de39.PNGG "Logowanie")
+![Alt text](https://user-images.githubusercontent.com/44456037/56207826-ff18a980-604f-11e9-9598-defb62a9de39.PNG "Logowanie")
