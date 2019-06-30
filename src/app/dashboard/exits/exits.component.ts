@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
+import { Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 
 declare var moment;
@@ -25,20 +27,25 @@ export class ExitsComponent implements OnInit {
 
 
 
-  constructor(public api: ApiService) {
+  constructor(public api: ApiService, public router: Router, public localStorage: LocalStorageService) {
 
-    this.api.getUserExits().subscribe(res=>{
+    this.api.getUserExits().subscribe(res => {
       const min = moment();
-      this.exits = res.data.filter(el=>{
+      this.exits = res.data.filter(el => {
         return min.isBefore(el.date);
       });
-      this.exitsAll = res.data.filter(el=>{
+      this.exitsAll = res.data.filter(el => {
         return min.isBefore(el.date);
       });
     });
    }
 
   ngOnInit() {
+    this.api.getLoginUser().subscribe(res => {
+      if (res.data.roleId === 2) {
+        this.router.navigate(['people']);
+      }
+    });
   }
 
   public convertDate(date) {
@@ -47,7 +54,7 @@ export class ExitsComponent implements OnInit {
 
 
   public changeStatus(word) {
-    switch(word){
+    switch (word) {
 
       case 'Wszystkie':
         this.displayMode = 'Wszystkie';
@@ -94,14 +101,16 @@ export class ExitsComponent implements OnInit {
       if(moment(form.value['startTime']).isBefore(moment(form.value['stopTime']))){
         this.fromToDate = [
           moment(form.value['startTime']).format('YYYY-MM-DD'),
-          moment(form.value['stopTime']).format('YYYY-MM-DD')
+          moment(form.value['stopTime']).format('YYYY-MM-DD'),
+          this.localStorage.getItem('WorkFlow', 'Session').userId
+
         ];
         // const fromToDate = [form.value['startTime'],form.value['stopTime']];
-        this.api.getUsersExits(this.fromToDate).subscribe(res=>{
+        this.api.getUserExits2(this.fromToDate).subscribe(res => {
           this.exitsAll = res.data;
           this.changeStatus(this.displayMode);
         });
-      }else {
+      } else {
         this.errorIsBefore = true;
       }
     }

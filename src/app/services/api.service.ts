@@ -29,10 +29,12 @@ export class ApiService {
     return this.http.get(this.urlApi + 'user/usersAll');
   }
 
+  /** wysyłanie mail */
   public createExit(exit) {
     return this.http.post(this.urlApi + 'exit/create', exit);
   }
 
+  /** wysyłanie mail */
   public editExit(exit) {
     return this.http.put(this.urlApi + 'exit/edit', exit);
   }
@@ -44,6 +46,16 @@ export class ApiService {
 
   public getUserExits(): Observable<any> {
     return this.http.get(this.urlApi + 'exit/getUserExits');
+  }
+
+  public getUserExits2(formData): Observable<any> {
+    const params = new HttpParams()
+
+    .set('startTime', formData[0])
+    .set('stopTime', formData[1])
+    .set('idUser', formData[2]);
+
+    return this.http.get(this.urlApi + 'exit/getUserExits2', {params: params});
   }
 
   public usersTimetables(): Observable<any> {
@@ -65,6 +77,29 @@ export class ApiService {
     const params = new HttpParams()
     .set('idExit', id);
     return this.http.get(this.urlApi + 'exit/get', {params: params});
+  }
+
+  public setDeputy(deputy): Observable<any> {
+    return this.http.post(this.urlApi + 'user/setDeputy', deputy);
+  }
+
+  public getExitsFromTimeAll(formData): Observable<any> {
+    const params = new HttpParams()
+    .set('startTime', formData['startTime'])
+    .set('stopTime', formData['stopTime'])
+    .set('id', formData['id']);
+    return this.http.get(this.urlApi + 'exit/getExitsFromTime', {params: params});
+  }
+  public getExitsFromTimeWithStatus(jsonData): Observable<any> {
+    return this.http.get(this.urlApi + 'exit/getExitsFromTimeWithStatus', );
+  }
+
+  public acceptExit(jsonData): Observable<any> {
+    return this.http.post(this.urlApi + 'exit/accept', jsonData);
+  }
+
+  public refuseExit(jsonData): Observable<any> {
+    return this.http.post(this.urlApi + 'exit/refuse', jsonData);
   }
 
 }

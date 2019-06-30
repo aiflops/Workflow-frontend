@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { LogoutGuard } from './guards/logout.guards';
 import { AccountGuard } from './guards/account.guards';
+import { RefuseComponent } from './refuse/refuse.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 const routes: Routes = [
 
@@ -20,7 +22,7 @@ const routes: Routes = [
 
   { path: 'exits', data: { 'barVisible': true }, component: ExitsComponent, canActivate: [AccountGuard]  },
 
-  { path: 'message', data: { 'barVisible': true }, component: MessagesComponent, canActivate: [AccountGuard]  },
+  // { path: 'message', data: { 'barVisible': true }, component: MessagesComponent, canActivate: [AccountGuard]  },
 
   { path: 'settings', data: { 'barVisible': true }, component: SettingsComponent, canActivate: [AccountGuard]  },
 
@@ -33,6 +35,10 @@ const routes: Routes = [
   { path: 'login', data: { 'barVisible': false }, component: LoginComponent, canActivate: [LogoutGuard]  },
 
   { path: 'changePassword', data: { 'barVisible': false }, component: ChangePasswordComponent, canActivate: [LogoutGuard]  },
+
+  { path: 'refuse/:hash', data: { 'barVisible': false }, component: RefuseComponent  },
+
+  { path: 'confirm/:hash', data: { 'barVisible': false }, component: ConfirmComponent  },
 ];
 
 @NgModule({

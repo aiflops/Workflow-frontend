@@ -12,3 +12,64 @@
 .table-rows:hover{
     cursor: pointer;
 }
+
+
+.dropdown{
+    margin-right: 20px;
+}
+.dropdown-item{
+    cursor: pointer;
+}
+.dropdown-item:active{
+    background-color: white;
+}
+
+.borderless th {
+    border-top: none;
+}
+
+.table-rows:hover{
+    cursor: pointer;
+}
+
+.check-green {
+    color: greenyellow !important;
+}
+.close-red {
+    color: red !important;
+}
+.clock-orange{
+    color: orange;
+}
+
+.table-rows td, tr {
+    text-align: center;
+}
+
+input[type=text], input[type=password], input[type=time],  input[type=date] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 8px;
+    display: inline-block;
+    border: 1px solid #ccc;
+}
+.error-message{
+    display: block;
+}
+
+.show{
+    display: block;
+}
+
+.hide{
+    display: none;
+}
+
+.select-user{
+    display: block;
+}
+
+.submit-btn-own{
+    display: block;
+}
+

@@ -3,7 +3,6 @@ import { Exit } from 'src/app/models/models';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ApiService } from 'src/app/services/api.service';
 import * as jspdf from 'jspdf';
-
 import html2canvas from 'html2canvas';
 
 
@@ -105,9 +104,9 @@ export class DayModalComponent implements OnInit {
 
 
     formValue['idUser'] = this.localStorage.getItem('WorkFlow', 'Session').userId;
-    formValue['date'] = this.momentDay.format('YYYY-MM-DD')
+    formValue['date'] = this.momentDay.format('YYYY-MM-DD');
 
-    this.api.createExit(formValue).subscribe(res=> {
+    this.api.createExit(formValue).subscribe(res => {
         this.close();
       });
     }
@@ -127,7 +126,7 @@ export class DayModalComponent implements OnInit {
       const formValue = form.value;
       this.isWeekend  =  this.isWeekendDay(formValue['date']);
 
-      if ( form.valid && !this.isWeekend) {
+      if ( form.valid ) {
 
         formValue['idExit'] = this.exit.id;
         formValue['duration'] = formValue['duration'].substring(0, 5);
@@ -154,6 +153,7 @@ export class DayModalComponent implements OnInit {
     public remove() {
       this.api.deleteExit({idExit: this.exit.id}).subscribe(res => {
         this.close();
+        location.reload();
       }).add(() => {
 
       }
